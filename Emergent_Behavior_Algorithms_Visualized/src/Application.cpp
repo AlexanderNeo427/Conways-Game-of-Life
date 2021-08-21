@@ -16,7 +16,7 @@ Application::~Application()
 
 bool Application::OnUserCreate()
 {
-	m_simulation = new Flocking(ScreenWidth(), ScreenHeight());
+	m_simulation = new FlockingSim(this);
 	m_simulation->Init();
 	return true;
 }
@@ -24,7 +24,7 @@ bool Application::OnUserCreate()
 bool Application::OnUserUpdate(float deltaTime)
 {
 	m_simulation->Update(deltaTime);
-	m_simulation->Render(this);
+	m_simulation->Render();
 	return true;
 }
 

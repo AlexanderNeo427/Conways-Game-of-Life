@@ -152,13 +152,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Emergent Behavior Algorithms\Flocking\Boid.cpp" />
-    <ClCompile Include="src\Emergent Behavior Algorithms\Flocking\Flocking.cpp" />
+    <ClCompile Include="src\Emergent Behavior Algorithms\Flocking\FlockingSim.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Emergent Behavior Algorithms\Flocking\Body.h" />
     <ClInclude Include="src\Emergent Behavior Algorithms\Flocking\Boid.h" />
-    <ClInclude Include="src\Emergent Behavior Algorithms\Flocking\Flocking.h" />
+    <ClInclude Include="src\Emergent Behavior Algorithms\Flocking\FlockingSim.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\ISimulation.h" />
   </ItemGroup>

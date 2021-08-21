@@ -2,7 +2,7 @@
 #define APPLICATION_H
 
 // All scenes here
-#include "Emergent Behavior Algorithms/Flocking/Flocking.h"
+#include "Emergent Behavior Algorithms/Flocking/FlockingSim.h"
 
 class Application : public olc::PixelGameEngine
 {

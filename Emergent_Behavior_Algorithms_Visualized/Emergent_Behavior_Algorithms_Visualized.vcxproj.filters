@@ -21,7 +21,7 @@
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Emergent Behavior Algorithms\Flocking\Flocking.cpp">
+    <ClCompile Include="src\Emergent Behavior Algorithms\Flocking\FlockingSim.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Emergent Behavior Algorithms\Flocking\Boid.cpp">
@@ -35,10 +35,13 @@
     <ClInclude Include="src\ISimulation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Emergent Behavior Algorithms\Flocking\Flocking.h">
+    <ClInclude Include="src\Emergent Behavior Algorithms\Flocking\FlockingSim.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Emergent Behavior Algorithms\Flocking\Boid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Emergent Behavior Algorithms\Flocking\Body.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
