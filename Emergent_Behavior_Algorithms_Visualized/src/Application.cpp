@@ -16,7 +16,8 @@ Application::~Application()
 
 bool Application::OnUserCreate()
 {
-	m_simulation = new FlockingSim(this);
+	// Change the current simulation here
+	m_simulation = new Flocking::FlockingSim(this);
 	m_simulation->Init();
 	return true;
 }

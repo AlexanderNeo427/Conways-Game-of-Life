@@ -11,40 +11,43 @@
 #include "glm/mat3x3.hpp"
 #include "glm/vec2.hpp"
 
-struct Body
+namespace Flocking
 {
-	glm::vec2 points[3];
-
-	Body()
+	struct Body
 	{
-		points[0] = glm::vec2( 7.f,  0.f);
-		points[1] = glm::vec2(-3.f, -2.8f);
-		points[2] = glm::vec2(-3.f,  2.8f);
-	}
+		glm::vec2 points[3];
 
-	Body& Rotate(float theta)
-	{
-		float cosTheta = glm::cos(theta);
-		float sinTheta = glm::sin(theta);
-
-		for (int i = 0; i < 3; ++i)
+		Body()
 		{
-			float x = points[i].x;
-			float y = points[i].y;
-			points[i].x = cosTheta * x - sinTheta * y;
-			points[i].y = sinTheta * x + cosTheta * y;
+			points[0] = glm::vec2( 7.f,  0.f);
+			points[1] = glm::vec2(-3.f, -2.8f);
+			points[2] = glm::vec2(-3.f,  2.8f);
 		}
-		return *this;
-	}
 
-	Body& Translate(const glm::vec2& translation)
-	{
-		for (int i = 0; i < 3; ++i)
+		Body& Rotate(float theta)
 		{
-			points[i] += translation;
+			float cosTheta = glm::cos(theta);
+			float sinTheta = glm::sin(theta);
+
+			for (int i = 0; i < 3; ++i)
+			{
+				float x = points[i].x;
+				float y = points[i].y;
+				points[i].x = cosTheta * x - sinTheta * y;
+				points[i].y = sinTheta * x + cosTheta * y;
+			}
+			return *this;
 		}
-		return *this;
-	}
-};
+
+		Body& Translate(const glm::vec2& translation)
+		{
+			for (int i = 0; i < 3; ++i)
+			{
+				points[i] += translation;
+			}
+			return *this;
+		}
+	};
+}
 
 #endif
