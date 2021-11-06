@@ -151,17 +151,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Emergent Behavior Algorithms\Flocking\Boid.cpp" />
-    <ClCompile Include="src\Emergent Behavior Algorithms\Flocking\FlockingSim.cpp" />
+    <ClCompile Include="src\Simulations\ConwayGameOfLife\GameOfLife.cpp" />
+    <ClCompile Include="src\Simulations\Flocking\Boid.cpp" />
+    <ClCompile Include="src\Simulations\Flocking\FlockingSim.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Emergent Behavior Algorithms\Flocking\Body.h" />
-    <ClInclude Include="src\Emergent Behavior Algorithms\Flocking\Boid.h" />
-    <ClInclude Include="src\Emergent Behavior Algorithms\Flocking\FlockingSim.h" />
+    <ClInclude Include="src\Simulations\ConwayGameOfLife\GameOfLife.h" />
+    <ClInclude Include="src\Simulations\Flocking\Body.h" />
+    <ClInclude Include="src\Simulations\Flocking\Boid.h" />
+    <ClInclude Include="src\Simulations\Flocking\FlockingSim.h" />
     <ClInclude Include="src\Application.h" />
-    <ClInclude Include="src\ISimulation.h" />
+    <ClInclude Include="src\Simulations\SimulationBase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

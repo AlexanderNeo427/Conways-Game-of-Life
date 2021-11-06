@@ -21,10 +21,13 @@
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Emergent Behavior Algorithms\Flocking\FlockingSim.cpp">
+    <ClCompile Include="src\Simulations\Flocking\FlockingSim.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Emergent Behavior Algorithms\Flocking\Boid.cpp">
+    <ClCompile Include="src\Simulations\Flocking\Boid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Simulations\ConwayGameOfLife\GameOfLife.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,16 +35,19 @@
     <ClInclude Include="src\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ISimulation.h">
+    <ClInclude Include="src\Simulations\SimulationBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Emergent Behavior Algorithms\Flocking\FlockingSim.h">
+    <ClInclude Include="src\Simulations\Flocking\FlockingSim.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Emergent Behavior Algorithms\Flocking\Boid.h">
+    <ClInclude Include="src\Simulations\Flocking\Boid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Emergent Behavior Algorithms\Flocking\Body.h">
+    <ClInclude Include="src\Simulations\Flocking\Body.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Simulations\ConwayGameOfLife\GameOfLife.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

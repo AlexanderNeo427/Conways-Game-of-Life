@@ -4,14 +4,11 @@ namespace Flocking
 {
 	FlockingSim::FlockingSim(olc::PixelGameEngine* pge)
 		:
-		m_pge(pge),
+		SimulationBase(pge),
 		m_separation(1.0f),
 		m_alignment(1.0f),
 		m_cohesion(1.0f)
-	{
-		m_screenWidth  = pge->ScreenWidth();
-		m_screenHeight = pge->ScreenHeight();
-	}
+	{}
 
 	void FlockingSim::Init()
 	{

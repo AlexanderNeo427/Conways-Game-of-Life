@@ -2,7 +2,8 @@
 #define APPLICATION_H
 
 // All scenes here
-#include "Emergent Behavior Algorithms/Flocking/FlockingSim.h"
+#include "Simulations/Flocking/FlockingSim.h"
+#include "Simulations/ConwayGameOfLife/GameOfLife.h"
 
 class Application : public olc::PixelGameEngine
 {
@@ -14,7 +15,7 @@ public:
 	bool OnUserUpdate(float deltaTime) override;
 	bool OnUserDestroy()			   override;
 private:
-	ISimulation* m_simulation;
+	SimulationBase* m_simulation;
 };
 
 #endif
