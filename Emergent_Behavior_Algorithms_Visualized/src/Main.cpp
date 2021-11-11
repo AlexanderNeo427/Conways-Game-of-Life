@@ -5,7 +5,7 @@ int main()
 {
 	Application* app = new Application();
 
-	if (app->Construct(900, 900, 1, 1, false, false, false))
+	if (app->Construct(150, 100, 10, 10))
 	{
 		app->Start();
 	}

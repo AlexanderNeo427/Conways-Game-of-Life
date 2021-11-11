@@ -1,31 +1,26 @@
 #include "GameOfLife.h"
 
-GameOfLife::GameOfLife(olc::PixelGameEngine* pge) 
+GOL::GameOfLife::GameOfLife(olc::PixelGameEngine* pge)
 	:
 	SimulationBase(pge), 
 	m_grid(nullptr),
 	m_numGridCells(0),
-	m_gridSizeX(0), m_gridSizeY(0), 
-	m_gridDeltaX(0), m_gridDeltaY(0),
 	m_timeSinceLastStep(0.f),
 	m_isRunning(false)
 {}
 
-void GameOfLife::Init()
+void GOL::GameOfLife::Init()
 {
-	m_numGridCells = NUM_GRID_X * NUM_GRID_Y;
+	m_numGridCells = m_screenWidth * m_screenHeight;
 
-	m_grid = m_gridCopy = new bool[m_numGridCells];
+	m_grid = new bool[m_numGridCells];
+	m_gridCopy = new bool[m_numGridCells];
+
 	for (int i = 0; i < m_numGridCells; ++i)
 	{
-		m_grid[i] = m_gridCopy[i] = false;
+		m_grid[i]	  = false;
+		m_gridCopy[i] = false;
 	}
-
-	m_gridDeltaX = m_screenWidth / NUM_GRID_X;
-	m_gridDeltaY = m_screenHeight / NUM_GRID_Y;
-
-	m_gridSizeX = m_gridDeltaX * (1.f - GRID_OFFSET);
-	m_gridSizeY = m_gridDeltaY * (1.f - GRID_OFFSET);
 
 	m_directions =
 	{
@@ -40,17 +35,35 @@ void GameOfLife::Init()
 	};
 }
 
-void GameOfLife::Update(float deltaTime)
+void GOL::GameOfLife::Update(float deltaTime)
 {
 	//------------- Input ---------------
-	if (m_pge->GetMouse(0).bPressed)
+	if (m_pge->GetMouse(0).bHeld)
 	{
-		int gridX = m_pge->GetMouseX() / NUM_GRID_X;
-		int gridY = m_pge->GetMouseY() / NUM_GRID_Y;
-		int index = (gridY * NUM_GRID_X) + gridX;
+		int gridX = m_pge->GetMouseX();
+		int gridY = m_pge->GetMouseY();
+		int index = (gridY * m_screenWidth) + gridX;
 
-		m_grid[index] = !m_grid[index];
-		*m_gridCopy = *m_grid;
+		//for (int x = 0; x < 10; ++x)
+		//{
+		//	for (int y = 0; y < 10; ++y)
+		//	{
+		//		m_grid[index + x + y] = true;
+
+		//		m_gridCopy[index + x + y] = true;
+		//	}
+		//}
+		m_grid[index] = true;
+		m_gridCopy[index] = true;
+	}
+	else if (m_pge->GetMouse(1).bHeld)
+	{
+		int gridX = m_pge->GetMouseX();
+		int gridY = m_pge->GetMouseY();
+		int index = (gridY * m_screenWidth) + gridX;
+
+		m_grid[index] = false;
+		m_gridCopy[index] = false;
 	}
 
 	if (m_pge->GetKey(olc::SPACE).bPressed)
@@ -60,21 +73,22 @@ void GameOfLife::Update(float deltaTime)
 	if (!m_isRunning) return;
 
 	//--------- Simulation Logic ---------
-	m_timeSinceLastStep += deltaTime;
+	//m_timeSinceLastStep += deltaTime;
 
-	if (m_timeSinceLastStep < TIME_STEP)
-		return;
+	//if (m_timeSinceLastStep < TIME_STEP)
+	//	return;
 
-	m_timeSinceLastStep = 0.f;
+	//m_timeSinceLastStep = 0.f;
 
 	// Update rules
-	*m_gridCopy = *m_grid;
+	// Make copy of grid
+	MakeGridCopy(m_grid, m_gridCopy, m_numGridCells);
 
-	for (int y = 0; y < NUM_GRID_Y; ++y)
+	for (int y = 0; y < m_screenHeight; ++y)
 	{
-		for (int x = 0; x < NUM_GRID_X; ++x)
+		for (int x = 0; x < m_screenWidth; ++x)
 		{
-			int index = (y * NUM_GRID_X) + x;
+			int index = (y * m_screenWidth) + x;
 
 			if (m_gridCopy[index] == true)
 			{
@@ -94,30 +108,24 @@ void GameOfLife::Update(float deltaTime)
 	}
 }
 
-void GameOfLife::Render()
+void GOL::GameOfLife::Render()
 {
 	m_pge->Clear(olc::DARK_GREY);
 
-	int posX = GRID_OFFSET;
-	int posY = GRID_OFFSET;
-
-	for (int y = 0; y < NUM_GRID_Y; ++y)
+	for (int y = 0; y < m_screenHeight; ++y)
 	{
-		for (int x = 0; x < NUM_GRID_X; ++x)
+		for (int x = 0; x < m_screenWidth; ++x)
 		{
-			int index = (y * NUM_GRID_X) + x;
+			int index = (y * m_screenWidth) + x;
 			olc::Pixel fillColor = m_grid[index] ? olc::BLACK : olc::WHITE;
-			m_pge->FillRect(posX, posY, m_gridSizeX, m_gridSizeY, fillColor);
-			posX += m_gridDeltaX;
+			m_pge->Draw(x, y, fillColor);
 		}
-		posY += m_gridDeltaY;
-		posX = GRID_OFFSET;
 	}
 }
 
-void GameOfLife::Exit() {}
+void GOL::GameOfLife::Exit() {}
 
-int GameOfLife::GetLiveNeighbourCount(int x, int y, bool* grid) 
+int GOL::GameOfLife::GetLiveNeighbourCount(int x, int y, bool* grid)
 {
 	int numNeighbours = 0;
 
@@ -126,15 +134,23 @@ int GameOfLife::GetLiveNeighbourCount(int x, int y, bool* grid)
 		int nextX = x + dir.x;
 		int nextY = y + dir.y;
 
-		if (nextX < 0 || nextX >= NUM_GRID_X ||
-			nextY < 0 || nextY >= NUM_GRID_Y)
+		if (nextX < 0 || nextX >= m_screenWidth ||
+			nextY < 0 || nextY >= m_screenHeight)
 		{
 			continue;
 		}
 
-		if (grid[(nextY * NUM_GRID_X) + nextX])
+		if (grid[(nextY * m_screenWidth) + nextX])
 			++numNeighbours;
 	}
 
 	return numNeighbours;
+}
+
+void GOL::GameOfLife::MakeGridCopy(bool* grid, bool* gridCopy, int n)
+{
+	for (int i = 0; i < n; ++i)
+	{
+		gridCopy[i] = grid[i];
+	}
 }
