@@ -12,6 +12,6 @@ Despite being quite rudimentary (each cell operates on only 3 rules), Conway's G
 * Made with C++ and the olcPixelGameEngine for rendering. Threw in some ombre colouring for the * aesthetics *, with the colour of each cell decided by it's position within the grid
 
 ### Controls
-Left Mouse Button (LMB) - Toggle cell alive
-Right Mouse Button (RMB) - Toggle cell dead
+Left Mouse Button (LMB) - Toggle cell alive\
+Right Mouse Button (RMB) - Toggle cell dead\
 Spacebar - Toggle pause/unpause
